@@ -95,30 +95,51 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun percent(view: View) {
+    fun mathMethods(view: View) {
         if(view is Button) {
+            val operation: String = view.text.toString()
             var result: String = resultTextView.text.toString()
+
             if(!result.isEmpty()) {
-                resultTextView.text = (result.toDouble() / 100).toString()
+
+                when(operation) {
+                    "%" -> resultTextView.text = (result.toDouble() / 100).toString()
+                    "√" -> resultTextView.text = ((sqrt(result.toDouble())).toString())
+                    "+/-" -> resultTextView.text = ((result.toDouble() * -1).toString())
+                }
+
             }
         }
     }
 
-    fun positiveOrNegative(view: View) {
-        if(view is Button) {
-            var result: String = resultTextView.text.toString()
-            if(!result.isEmpty()) {
-                resultTextView.text = ((result.toDouble() * -1).toString())
+    /*
+        ეს ცალ-ცალკე
+        fun percent(view: View) {
+            if(view is Button) {
+                var result: String = resultTextView.text.toString()
+                if(!result.isEmpty()) {
+                    resultTextView.text = (result.toDouble() / 100).toString()
+                }
             }
         }
-    }
 
-    fun getSqrt(view: View) {
-        if(view is Button) {
-            var result: String = resultTextView.text.toString()
-            if(!result.isEmpty()) {
-                resultTextView.text = ((sqrt(result.toDouble())).toString())
+        fun positiveOrNegative(view: View) {
+            if(view is Button) {
+                var result: String = resultTextView.text.toString()
+                if(!result.isEmpty()) {
+                    resultTextView.text = ((result.toDouble() * -1).toString())
+                }
             }
         }
-    }
+
+        fun getSqrt(view: View) {
+            if(view is Button) {
+                var result: String = resultTextView.text.toString()
+                if(!result.isEmpty()) {
+                    resultTextView.text = ((sqrt(result.toDouble())).toString())
+                }
+            }
+        }
+    */
+
 }
