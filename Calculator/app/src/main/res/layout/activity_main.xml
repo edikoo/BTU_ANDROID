@@ -45,8 +45,8 @@
             android:layout_marginStart="1dp"
             android:layout_marginEnd="1dp"
             android:layout_weight="1"
-            android:onClick="mathMethods"
             android:background="#55ABCA"
+            android:onClick="mathMethods"
             android:text="√"
             android:textColor="#FFFF"
             android:textSize="22sp" />
@@ -55,8 +55,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="mathMethods"
             android:background="#55ABCA"
+            android:onClick="mathMethods"
             android:text="+/-"
             android:textColor="#FFFF"
             android:textSize="22sp" />
@@ -103,6 +103,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
+                android:layout_marginEnd="1dp"
                 android:layout_weight="1"
                 android:background="#88FF00"
                 android:onClick="numberClick"
@@ -152,6 +153,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
+                android:layout_marginEnd="1dp"
                 android:layout_weight="1"
                 android:background="#88FF00"
                 android:onClick="numberClick"
@@ -201,6 +203,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
+                android:layout_marginEnd="1dp"
                 android:layout_weight="1"
                 android:background="#88FF00"
                 android:onClick="numberClick"
@@ -251,9 +254,10 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
+                android:layout_marginEnd="1dp"
                 android:layout_weight="1"
-                android:onClick="point"
                 android:background="#0055FF"
+                android:onClick="point"
                 android:text="."
                 android:textColor="#FFFF"
                 android:textSize="30sp" />
