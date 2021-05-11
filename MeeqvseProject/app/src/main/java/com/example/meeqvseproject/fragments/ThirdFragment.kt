@@ -58,6 +58,15 @@ class ThirdFragment : Fragment(R.layout.fragment_third) {
                 )
         )
 
+        persons.add(
+                Person(
+                        4,
+                        "gela",
+                        "samxaradze",
+                        "https://media2.s-nbcnews.com/j/newscms/2019_26/2914436/190628-bmw-m-next-al-1002_18c897ef97cc5847e516173c93a76dab.nbcnews-fp-1200-630.jpg"
+                )
+        )
+
         return persons
     }
 }
