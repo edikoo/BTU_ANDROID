@@ -10,6 +10,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.rest.api.RetrofitClient
 import com.example.rest.api.dto.CommentDto
 import com.example.rest.api.dto.PostDto
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,31 +31,40 @@ class SecondActivity : AppCompatActivity() {
         commentsRecyclerView = findViewById(R.id.recyclerCommentView)
 
 
-        val id = intent.extras?.getLong("id").toString()
 
-        RetrofitClient.JsonPlaceholderApi.getComments(id.toLong()).enqueue(object : Callback<List<CommentDto>> {
-            override fun onResponse(
-                    call: Call<List<CommentDto>>,
-                    response: Response<List<CommentDto>>
-            ) {
-                if(response.isSuccessful && response.body() != null) {
+        val gson = Gson()
+        val post = gson.fromJson<Post>(intent.getStringExtra("post"), Post::class.java)
 
-                    val comments = ArrayList<CommentDto>()
+        getSupportActionBar()?.setTitle(post.postTitle);
 
-                    response.body()?.forEach { comment -> comments.add(comment) }
+        var postId = post.postId?.toLong()
 
-                    commentsCount.text = "Count: " + comments.size.toString()
+        if (postId != null) {
+            RetrofitClient.JsonPlaceholderApi.getComments(postId).enqueue(object : Callback<List<CommentDto>> {
+                override fun onResponse(
+                        call: Call<List<CommentDto>>,
+                        response: Response<List<CommentDto>>
+                ) {
+                    if(response.isSuccessful && response.body() != null) {
 
-                    recyclerViewCommentsAdapter = CommentsAdapater(comments)
-                    commentsRecyclerView.layoutManager = LinearLayoutManager(this@SecondActivity)
-                    commentsRecyclerView.adapter = recyclerViewCommentsAdapter
+                        val comments = ArrayList<CommentDto>()
 
+                        response.body()?.forEach { comment -> comments.add(comment) }
+
+                        commentsCount.text = "Count: " + comments.size.toString()
+
+                        recyclerViewCommentsAdapter = CommentsAdapater(comments)
+                        commentsRecyclerView.layoutManager = LinearLayoutManager(this@SecondActivity)
+                        commentsRecyclerView.adapter = recyclerViewCommentsAdapter
+
+                    }
                 }
-            }
-            override fun onFailure(call: Call<List<CommentDto>>, t: Throwable) {
-                Log.d("FAIL", t.toString())
-            }
-        })
+
+                override fun onFailure(call: Call<List<CommentDto>>, t: Throwable) {
+                    Log.d("FAIL", t.toString())
+                }
+            })
+        }
 
     }
 }

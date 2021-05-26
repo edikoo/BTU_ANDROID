@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import android.content.Intent
+import com.google.gson.Gson
 
 
 class PostsAdapater(private val posts: List<Post>) : RecyclerView.Adapter<PostsAdapater.RecycleViewHolder>() {
@@ -34,7 +35,10 @@ class PostsAdapater(private val posts: List<Post>) : RecyclerView.Adapter<PostsA
             v: View -> Unit
 
             val intent = Intent(v.context, SecondActivity::class.java)
-            intent.putExtra("id", posts[holder.position].postId)
+
+            val gson = Gson()
+
+            intent.putExtra("post", gson.toJson(posts[holder.position]))
             v.context.startActivity(intent)
 
         }
