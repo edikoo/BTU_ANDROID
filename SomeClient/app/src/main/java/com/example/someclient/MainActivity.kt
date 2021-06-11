@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        val email: String = "e2@gmail.com"
+        val email: String = "e2dd@gmail.com"
         val password = "12345678"
 
         mAuth
