@@ -41,6 +41,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="10dp"
         android:hint="Password"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginEmail" />
@@ -50,23 +51,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="10dp"
         android:text="LOGIN"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
 
     <TextView
-        android:id="@+id/backToRegistration"
+        android:id="@+id/forgotPassowrd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:textSize="19sp"
-        android:textColor="@color/black"
-        android:text="Back to registration"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
         android:textAlignment="center"
+        android:text="Forgot Password?"
+        android:textColor="@color/black"
+        android:textSize="17sp"
         app:layout_constraintTop_toBottomOf="@+id/loginButton"
-        tools:layout_editor_absoluteX="0dp"
-        />
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/backToRegistration"
+        android:layout_width="match_parent"
+        android:layout_margin="0dp"
+        android:text="Don't Have Account?"
+        android:textAllCaps="false"
+        android:layout_height="50dp"
+        android:background="#A4ABA4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forgotPassowrd"
+        app:layout_constraintVertical_bias="1.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

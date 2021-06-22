@@ -61,8 +61,10 @@ class MainActivity : AppCompatActivity() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Registracia warmatebit shesrulda!", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, ActionActivity::class.java)
+                        startActivity(intent)
                     } else {
-                        Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Registracia Ver Moxerdxa!", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
