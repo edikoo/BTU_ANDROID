@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinaluriGamocda">
-        <activity android:name=".ActionActivity"></activity>
+        <activity android:name=".StartQuiz"></activity>
+        <activity android:name=".CreateQuestionForQuiz" />
+        <activity android:name=".ActionActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

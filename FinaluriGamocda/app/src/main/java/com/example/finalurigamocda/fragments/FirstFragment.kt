@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.example.finalurigamocda.R
 import com.example.finalurigamocda.adapters.MyQuizAdapter
 import com.example.finalurigamocda.models.Quiz
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -27,6 +28,7 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
 
     private lateinit var firestore: FirebaseFirestore
 
+    val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,6 +45,8 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
 
     private fun setUpFirebase(): List<Quiz> {
         val quizes = ArrayList<Quiz>()
+        val userEmail = mAuth.currentUser?.email.toString()
+
         firestore = FirebaseFirestore.getInstance()
         val collectionReference = firestore.collection("quizes")
         collectionReference.addSnapshotListener { value, error ->
@@ -51,7 +55,14 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
                 return@addSnapshotListener
             }
             quizes.clear()
-            quizes.addAll(value.toObjects(Quiz::class.java))
+
+            for (quiz in value.toObjects(Quiz::class.java)) {
+                if(quiz.email != userEmail) {
+                    quizes.add(quiz)
+                }
+            }
+
+            //quizes.addAll(value.toObjects(Quiz::class.java))
             recyclerView.adapter?.notifyDataSetChanged()
         }
         return quizes;
