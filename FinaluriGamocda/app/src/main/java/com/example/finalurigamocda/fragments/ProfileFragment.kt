@@ -28,6 +28,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         myEmail.text = mAuth.currentUser?.email.toString()
 
         val updatePasswordButton = view.findViewById<Button>(R.id.updatePasswordButton)
+        val logoutButton = view.findViewById<Button>(R.id.logoutButton)
+
         updatePasswordButton.setOnClickListener {
 
             val currentPassword = view.findViewById<EditText>(R.id.currentPassword).text.toString()
@@ -64,6 +66,13 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 }
 
 
+        }
+
+        logoutButton.setOnClickListener {
+            mAuth.signOut()
+            val intent = Intent (getActivity(), LoginActivity::class.java)
+            startActivity(intent)
+            getActivity()?.finish();
         }
 
     }

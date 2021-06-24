@@ -1,5 +1,6 @@
 package com.example.finalurigamocda
 
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -51,54 +52,27 @@ class StartQuiz : AppCompatActivity() {
         btnNext = findViewById(R.id.btnNext)
         btnSubmit = findViewById(R.id.btnSubmit)
 
+        runFirebase(quiz.id)
+        setUpEventListener(quiz.title)
+    }
+
+    private fun runFirebase(quizId: String) {
         firestore = FirebaseFirestore.getInstance()
-        var quizId = quiz.id
         if (quizId != null) {
             firestore.collection("questions").whereEqualTo("quizId", quizId)
                 //firestore.collection("questions")
                 .get()
                 .addOnSuccessListener {
                     if(it != null && !it.isEmpty){
-
                         questions = it.toObjects(Question::class.java)
                         Log.d("questions", questions.toString())
                         bindViews()
                     }
                 }
         }
-
-        setUpEventListener()
-
-        /*
-        val question = Question(
-            "222",
-            "Satesto Shekitxva",
-            "https://www.beano.com/wp-content/uploads/legacy/64956_blob.png?resize=768%2C432&quality=76&strip=all",
-            "pirveli",
-            "meore",
-            "mesame",
-            "meore"
-        )
-
-        val imageView = findViewById<ImageView>(R.id.imageViewQuiz2)
-
-        Glide.with(this)
-            .load(question.questionImage)
-            .centerCrop()
-            .placeholder(R.drawable.ic_launcher_foreground)
-            .into(imageView)
-
-
-        optionRecyclerView = findViewById(R.id.optionList)
-        recyclerOptionAdapter = OptionAdapter(this, question)
-        optionRecyclerView.layoutManager = LinearLayoutManager(this)
-        optionRecyclerView.adapter = recyclerOptionAdapter
-        optionRecyclerView.setHasFixedSize(true)
-        */
-
     }
 
-    private fun setUpEventListener() {
+    private fun setUpEventListener(quizTitle: String) {
         btnPrevious.setOnClickListener {
             index--
             bindViews()
@@ -122,11 +96,19 @@ class StartQuiz : AppCompatActivity() {
 
             }
 
-            Toast.makeText(this, (sumQuestions.toString() + " / " + score.toString()).toString(), Toast.LENGTH_SHORT).show()
+            var builder = AlertDialog.Builder(this)
+            builder.setTitle("$quizTitle დასრულდა")
+            builder.setMessage("თქვენ დააგროვეთ ${score.toString()} სწორი პასუხი ${sumQuestions.toString()} - დან")
+            builder.setNegativeButton("გასაგებია") { dialog, i ->
+                dialog.dismiss()
+                val intent = Intent(this, ActionActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+            builder.setCancelable(false)
+            builder.show()
 
 
-            //val intent = Intent(this, ActionActivity::class.java)
-            //startActivity(intent)
         }
 
     }

@@ -30,7 +30,7 @@ class OptionAdapter(val context: Context, val question: Question) :
     override fun onBindViewHolder(holder: OptionViewHolder, position: Int) {
         holder.optionView.text = options[position]
         holder.itemView.setOnClickListener {
-            Toast.makeText(context, options[position], Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context, options[position], Toast.LENGTH_SHORT).show()
             question.userAnswer = options[position]
             notifyDataSetChanged()
         }
