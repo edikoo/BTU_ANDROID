@@ -38,7 +38,7 @@ class StartQuiz : AppCompatActivity() {
 
     var questions : MutableList<Question>? = null
 
-    var index = 1
+    var index = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,8 +54,8 @@ class StartQuiz : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
         var quizId = quiz.id
         if (quizId != null) {
-            //firestore.collection("questions").whereEqualTo("quizId", quizId)
-            firestore.collection("questions")
+            firestore.collection("questions").whereEqualTo("quizId", quizId)
+                //firestore.collection("questions")
                 .get()
                 .addOnSuccessListener {
                     if(it != null && !it.isEmpty){
@@ -110,10 +110,23 @@ class StartQuiz : AppCompatActivity() {
         }
 
         btnSubmit.setOnClickListener {
-            Toast.makeText(this, "Tqven Daasrulet Qvizi", Toast.LENGTH_SHORT).show()
 
-            val intent = Intent(this, ActionActivity::class.java)
-            startActivity(intent)
+
+            var score = 0
+            var sumQuestions = questions!!.size
+
+            questions?.forEach {
+                if(it.userAnswer == it.answer) {
+                    score++
+                }
+
+            }
+
+            Toast.makeText(this, (sumQuestions.toString() + " / " + score.toString()).toString(), Toast.LENGTH_SHORT).show()
+
+
+            //val intent = Intent(this, ActionActivity::class.java)
+            //startActivity(intent)
         }
 
     }
@@ -123,10 +136,10 @@ class StartQuiz : AppCompatActivity() {
         btnSubmit.visibility = View.GONE
         btnNext.visibility = View.GONE
 
-        if(index == 1){ //first question
+        if(index == 0){ //first question
             btnNext.visibility = View.VISIBLE
         }
-        else if(index == questions!!.size) { // last question
+        else if(index == questions!!.size - 1) { // last question
             btnSubmit.visibility = View.VISIBLE
             btnPrevious.visibility = View.VISIBLE
         }
