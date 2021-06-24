@@ -45,6 +45,7 @@ class CreateQuizFragment : Fragment(R.layout.fragment_create_quiz) {
             firestore.collection("quizes")
                 .add(quiz)
                 .addOnSuccessListener {
+                    view.findViewById<EditText>(R.id.getQuizTitle).getText().clear()
                     Toast.makeText(getActivity(), "Qvizi warmatebit daemata", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener {
