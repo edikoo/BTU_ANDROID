@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val intent = Intent(this, ActionActivity::class.java)
                         startActivity(intent)
+                        finish()
                     } else {
                         Toast.makeText(this, "Registracia Ver Moxerdxa!", Toast.LENGTH_SHORT).show()
                     }
