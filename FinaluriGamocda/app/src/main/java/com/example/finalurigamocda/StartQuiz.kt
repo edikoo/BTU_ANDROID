@@ -98,7 +98,7 @@ class StartQuiz : AppCompatActivity() {
 
             var builder = AlertDialog.Builder(this)
             builder.setTitle("$quizTitle დასრულდა")
-            builder.setMessage("თქვენ დააგროვეთ ${score.toString()} სწორი პასუხი ${sumQuestions.toString()} - დან")
+            builder.setMessage("თქვენ დააგროვეთ ${score.toString()} სწორი პასუხი ${sumQuestions.toString()} შეკითხივიდან")
             builder.setNegativeButton("გასაგებია") { dialog, i ->
                 dialog.dismiss()
                 val intent = Intent(this, ActionActivity::class.java)

@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:backgroundTint="@null"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
         android:text="1. Satesto"
         android:textSize="14sp" />
 </LinearLayout>
